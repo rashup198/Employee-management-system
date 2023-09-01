@@ -1,0 +1,86 @@
+export const employeesData = [
+    {
+        id: 1,
+        firstName: "Priyanshu",
+        lastName: "Pandey",
+        email: "rashup198@gmail.com",
+        salary: "80000",
+        date: "2021-01-01",
+    },
+    {
+        id: 2,
+        firstName: "Rashmi",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",
+        salary: "90000",
+        date: "2021-01-01",
+    },
+    {
+        id: 3,
+        firstName: "Rahul",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",
+        salary: "90000",
+        date: "2021-01-01",
+    },
+    {
+        id: 4,
+        firstName: "Rajesh",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",     
+        salary: "90000",
+        date: "2021-01-01",
+    },
+    {
+        id: 5,
+        firstName: "Rohit",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",
+        salary: "90000",
+        date: "2021-01-01",
+    },
+    {
+        id: 6,
+        firstName: "Raju",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",
+        salary: "90000",
+        date: "2021-01-01",
+    },
+    {
+        id: 7,
+        firstName: "Ujjwal",
+        lastName: "Pandey",
+        email: "xyz@gmail.com", 
+        salary: "90000",
+        date: "2021-01-01",
+    },
+    {
+        id: 8,
+        firstName: "Utkarsh",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",
+        salary: "90000",       
+        date: "2021-01-01",
+    }, 
+    {
+        id: 9,
+        firstName: "Abhay",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",
+        salary: "90000",
+        date: "2021-01-01",
+    },
+    {
+        id: 10,
+        firstName: "Shailendra",
+        lastName: "Pandey",
+        email: "xyz@gmail.com",
+        salary: "90000",
+        date: "2021-01-01",
+    },
+
+
+]
+
+export default employeesData;
