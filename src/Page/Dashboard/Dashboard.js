@@ -15,11 +15,13 @@ const [employees, setEmployees] = useState(employeesData);
     const [isAdding, setIsAdding] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
-const handleEdit=()=>{
-
+const handleEdit=(id)=>{
+    console.log("the id is" , id);
 }
 
-const handleDelete=()=>{
+const handleDelete=(id)=>{
+
+  console.log("the delete id is" , id);
 
 }
 
@@ -27,7 +29,7 @@ const handleDelete=()=>{
     <div className=''>
       
       <div>
-        {/* //list of employees */}
+        {/* list of employees */}
         {!isAdding && !isEditing && (
           <div>
             <Header
@@ -43,7 +45,7 @@ const handleDelete=()=>{
         </div>
         )}
 
-        {/* //add employee */}
+        {/* add employee */}
 
         {
           isAdding && (
@@ -56,7 +58,7 @@ const handleDelete=()=>{
             </div>
           )}
 
-        {/* //edit employee */}
+        {/* edit employee */}
 
         {
           isEditing && (
