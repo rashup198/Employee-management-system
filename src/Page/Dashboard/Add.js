@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import Swal from 'sweetalert2'
 
-
 const Add = ({employees,setEmployees,setIsAdding}) => {
 
   const [firstName, setFirstName] = useState('');

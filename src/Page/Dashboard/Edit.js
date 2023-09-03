@@ -1,113 +1,123 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
+const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
+  // Use useEffect to update state when selectedEmployee changes
+  useEffect(() => {
+    setFirstName(selectedEmployee.firstName);
+    setLastName(selectedEmployee.lastName);
+    setEmail(selectedEmployee.email);
+    setSalary(selectedEmployee.salary);
+    setDate(selectedEmployee.date);
+  }, [selectedEmployee]);
 
-    const id = selectedEmployee.id;
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const [firstName, setFirstName] = useState(selectedEmployee.firstName);
-    const [lastName, setLastName] = useState(selectedEmployee.lastName);
-    const [email, setEmail] = useState(selectedEmployee.email);
-    const [salary, setSalary] = useState(selectedEmployee.salary);
-    const [date, setDate] = useState(selectedEmployee.date);
-
-    const handleUpdate = e => {
-        e.preventDefault();
-
-        if (!firstName || !lastName || !email || !salary || !date) {
-            return Swal.fire({
-                icon: 'error',
-                title: 'Error!',
-                text: 'All fields are required.',
-                showConfirmButton: true
-            });
-        }
-
-        const employee = {
-            id,
-            firstName,
-            lastName,
-            email,
-            salary,
-            date
-        };
-
-        for (let i = 0; i < employees.length; i++) {
-            if (employees[i].id === id) {
-                employees.splice(i, 1, employee);
-                break;
-            }
-        }
-
-        setEmployees(employees);
-        setIsEditing(false);
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Updated!',
-            text: `${employee.firstName} ${employee.lastName}'s data has been updated.`,
-            showConfirmButton: false,
-            timer: 1500
-        });
+    const updatedEmployee = {
+      id: selectedEmployee.id, // Use the id from selectedEmployee
+      firstName,
+      lastName,
+      email,
+      salary,
+      date,
     };
 
-    return (
-        <div className="small-container">
-            <form onSubmit={handleUpdate}>
-                <h1>Edit Employee</h1>
-                <label htmlFor="firstName">First Name</label>
-                <input
-                    id="firstName"
-                    type="text"
-                    name="firstName"
-                    value={firstName}
-                    onChange={e => setFirstName(e.target.value)}
-                />
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                    id="lastName"
-                    type="text"
-                    name="lastName"
-                    value={lastName}
-                    onChange={e => setLastName(e.target.value)}
-                />
-                <label htmlFor="email">Email</label>
-                <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <label htmlFor="salary">Salary ($)</label>
-                <input
-                    id="salary"
-                    type="number"
-                    name="salary"
-                    value={salary}
-                    onChange={e => setSalary(e.target.value)}
-                />
-                <label htmlFor="date">Date</label>
-                <input
-                    id="date"
-                    type="date"
-                    name="date"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
-                />
-                <div style={{ marginTop: '30px' }}>
-                    <input type="submit" value="Update" />
-                    <input
-                        style={{ marginLeft: '12px' }}
-                        className="muted-button"
-                        type="button"
-                        value="Cancel"
-                        onClick={() => setIsEditing(false)}
-                    />
-                </div>
-            </form>
-        </div>
+    const updatedEmployees = employees.map((employee) =>
+      employee.id === selectedEmployee.id ? updatedEmployee : employee
     );
-}
 
-export default Edit
+    setEmployees(updatedEmployees);
+    setIsEditing(false);
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Employee Updated Successfully',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
+  const [firstName, setFirstName] = useState(selectedEmployee.firstName);
+  const [lastName, setLastName] = useState(selectedEmployee.lastName);
+  const [email, setEmail] = useState(selectedEmployee.email);
+  const [salary, setSalary] = useState(selectedEmployee.salary);
+  const [date, setDate] = useState(selectedEmployee.date);
+
+  return (
+    <div className="container mx-auto p-4">
+      <form onSubmit={handleSubmit}>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+          Edit Employee
+        </h1>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          required
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          className="input-field"
+        />
+
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          required
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          className="input-field"
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="input-field"
+        />
+
+        <label htmlFor="salary">Salary</label>
+        <input
+          type="number"
+          id="salary"
+          name="salary"
+          required
+          value={salary}
+          onChange={(e) => setSalary(e.target.value)}
+          className="input-field"
+        />
+
+        <label htmlFor="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="input-field"
+        />
+
+        <div className="mt-6">
+          <button type="submit" className="btn-primary">
+            Update
+          </button>
+          <input
+            type="button"
+            value="Cancel"
+            onClick={() => setIsEditing(false)}
+            className="btn-secondary ml-2"
+          />
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Edit;
