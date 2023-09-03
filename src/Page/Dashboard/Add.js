@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import Swal from 'sweetalert2'
+
 
 const Add = ({employees,setEmployees,setIsAdding}) => {
 
@@ -7,10 +9,27 @@ const Add = ({employees,setEmployees,setIsAdding}) => {
   const [email, setEmail] = useState('');
   const [salary, setSalary] = useState('');
   const [date, setDate] = useState('');
+  
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    const id=employees.length+1;
+    const newEmployee={id,firstName,lastName,email,salary,date}; 
+    employees.push(newEmployee);
+    setEmployees(employees);
+    setIsAdding(false);
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Employee Added Successfully',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
 
   return (
     <div>
-        <form>
+        <form onSubmit={handleSubmit}>
         <h1>Add Employee</h1>
         <label htmlFor='firstName'>First Name</label>
         <input type='text' id='firstName' name='firstName' placeholder='Enter First Name' required value={firstName} onChange={e=>setFirstName(e.target.value)}></input>
@@ -27,7 +46,8 @@ const Add = ({employees,setEmployees,setIsAdding}) => {
         <label htmlFor='date'>Date</label>
         <input type='date' id='date' name='date' placeholder='Enter Date' required value={date} onChange={e=>setDate(e.target.value)}></input>
 
-        <button type='submit'>Add Employee</button>
+        <button type='submit' value="Add">Add</button>
+        <input type='button' value="Cancel" onClick={()=>setIsAdding(false)}></input>
         </form>
     </div>
   )
